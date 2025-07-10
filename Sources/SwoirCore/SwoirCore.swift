@@ -19,9 +19,9 @@ public enum SwoirBackendError: Error, Equatable {
 
 public protocol SwoirBackendProtocol {
     static func setup_srs(circuit_size: UInt32, srs_path: String?) throws -> UInt32
-    static func setup_srs_from_bytecode(bytecode: Data, srs_path: String?, recursive: Bool) throws -> UInt32
-    static func prove(bytecode: Data, witnessMap: [String], proof_type: String, recursive: Bool) throws -> Data
+    static func setup_srs_from_bytecode(bytecode: Data, srs_path: String?) throws -> UInt32
+    static func prove(bytecode: Data, witnessMap: [String], proof_type: String, vkey: Data) throws -> Data
     static func verify(proof: Data, vkey: Data, proof_type: String) throws -> Bool
     static func execute(bytecode: Data, witnessMap: [String]) throws -> [String]
-    static func get_verification_key(bytecode: Data, recursive: Bool) throws -> Data
+    static func get_verification_key(bytecode: Data, proof_type: String) throws -> Data
 }
