@@ -1,6 +1,6 @@
 # SwoirCore
 
-![Version](https://img.shields.io/badge/version-0.9.0-darkviolet)
+![Version](https://img.shields.io/badge/version-0.10.0-darkviolet)
 [![Swift 5](https://img.shields.io/badge/Swift-5-blue.svg)](https://developer.apple.com/swift/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-green)](https://opensource.org/license/apache-2-0)
 
