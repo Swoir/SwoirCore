@@ -14,7 +14,7 @@ final class SwoirCoreTests: XCTestCase {
             return 0
         }
 
-        static func prove(bytecode: Data, witnessMap: [String], proof_type: String, vkey: Data, low_memory_mode: Bool? = false) throws -> Data {
+        static func prove(bytecode: Data, witnessMap: [String], proof_type: String, vkey: Data, low_memory_mode: Bool? = false, storage_cap: UInt64? = nil) throws -> Data {
             if bytecode.isEmpty { throw SwoirBackendError.emptyBytecode }
             if witnessMap.isEmpty { throw SwoirBackendError.emptyWitnessMap }
             if proof_type.isEmpty { throw SwoirBackendError.emptyProofType }
@@ -33,7 +33,7 @@ final class SwoirCoreTests: XCTestCase {
             return witnessMap
         }
 
-        static func get_verification_key(bytecode: Data, proof_type: String, low_memory_mode: Bool? = false) throws -> Data {
+        static func get_verification_key(bytecode: Data, proof_type: String, low_memory_mode: Bool? = false, storage_cap: UInt64? = nil) throws -> Data {
             if bytecode.isEmpty { throw SwoirBackendError.emptyBytecode }
             return Data("bar".utf8)
         }
@@ -61,7 +61,7 @@ final class SwoirCoreTests: XCTestCase {
         XCTAssertThrowsError(try MockSwoirBackend.verify(proof: nonEmptyProof, vkey: emptyVKey, proof_type: "honk")) { error in
             XCTAssertEqual(error as? SwoirBackendError, .emptyVerificationKey)
         }
-        XCTAssertThrowsError(try MockSwoirBackend.prove(bytecode: bytecode, witnessMap: witnessMap, proof_type: "", vkey: nonEmptyVKey, low_memory_mode: false)) { error in
+        XCTAssertThrowsError(try MockSwoirBackend.prove(bytecode: bytecode, witnessMap: witnessMap, proof_type: "", vkey: nonEmptyVKey, low_memory_mode: false, storage_cap: nil)) { error in
             XCTAssertEqual(error as? SwoirBackendError, .emptyProofType)
         }
         XCTAssertThrowsError(try MockSwoirBackend.execute(bytecode: emptyBytecode, witnessMap: witnessMap)) { error in
@@ -76,7 +76,7 @@ final class SwoirCoreTests: XCTestCase {
         XCTAssertThrowsError(try MockSwoirBackend.setup_srs_from_bytecode(bytecode: emptyBytecode)) { error in
             XCTAssertEqual(error as? SwoirBackendError, .emptyBytecode)
         }
-        XCTAssertThrowsError(try MockSwoirBackend.get_verification_key(bytecode: emptyBytecode, proof_type: "honk", low_memory_mode: false)) { error in
+        XCTAssertThrowsError(try MockSwoirBackend.get_verification_key(bytecode: emptyBytecode, proof_type: "honk", low_memory_mode: false, storage_cap: nil)) { error in
             XCTAssertEqual(error as? SwoirBackendError, .emptyBytecode)
         }
     }
